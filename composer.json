@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VladimirYuldashev\\LaravelQueueRabbitMQ\\LaravelQueueRabbitMQServiceProvider"
+                "Ling5821\\Lconsul\\Providers\\ConsulServiceProvider"
             ]
         }
     }
