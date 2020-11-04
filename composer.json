@@ -13,5 +13,17 @@
         "illuminate/console": "5.8.*",
         "dcarbone/php-consul-api": "@stable",
         "illuminate/support": "5.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ling5821\\Lconsul\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VladimirYuldashev\\LaravelQueueRabbitMQ\\LaravelQueueRabbitMQServiceProvider"
+            ]
+        }
     }
 }
