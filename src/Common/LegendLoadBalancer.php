@@ -1,7 +1,7 @@
 <?php
 
 
-    namespace Cloud\Common;
+    namespace Ling5821\Lconsul\Common;
 
 
     class LegendLoadBalancer

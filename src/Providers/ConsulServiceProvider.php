@@ -1,6 +1,6 @@
 <?php
 
-    namespace Cloud\Providers;
+    namespace Ling5821\Lconsul\Providers;
 
     use Carbon\Laravel\ServiceProvider;
     use Illuminate\Console\Command;

@@ -1,17 +1,17 @@
 <?php
 
 
-    namespace Cloud\Commands;
+    namespace Ling5821\Lconsul\Commands;
 
 
-    use Cloud\Common\RedisUtils;
-    use Cloud\Common\Utils;
     use DCarbone\PHPConsulAPI\Agent\AgentServiceCheck;
     use DCarbone\PHPConsulAPI\Agent\AgentServiceRegistration;
     use DCarbone\PHPConsulAPI\Consul;
     use DCarbone\PHPConsulAPI\QueryOptions;
     use Illuminate\Console\Command;
     use Illuminate\Support\Facades\Log;
+    use Ling5821\Lconsul\Common\RedisUtils;
+    use Ling5821\Lconsul\Common\Utils;
 
     class ConsulCmd extends Command
     {
