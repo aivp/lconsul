@@ -32,7 +32,7 @@
             $this->appName = env("SERVICE_NAME", 'my-service');
             $this->serviceHost = env("SERVER_ADDR", '127.0.0.1');
             $this->servicePort = (int)env('SERVICE_PORT', 80);
-            $this->healthCheckUrl = env('SERVICE_HEALTH_CHECK_URL', "http://$this->servicePort:$this->servicePort/api/health");
+            $this->healthCheckUrl = env('SERVICE_HEALTH_CHECK_URL', "http://$this->serviceHost:$this->servicePort/api/health");
             $this->healthCheckInterval = env('SERVICE_HEALTH_CHECK_INTERVAL', 30);
         }
 
