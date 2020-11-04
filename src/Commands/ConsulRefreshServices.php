@@ -5,20 +5,20 @@
 
 
     use Illuminate\Console\Command;
-    use Ling5821\Lconsul\ServiceNode;
+    use Ling5821\Lconsul\ServiceManager;
 
-    class ConsulServicesRefresh extends Command
+    class ConsulRefreshServices extends Command
     {
         /**
          * The name and signature of the console command.
          * @var string
          */
-        protected $signature = 'consul:register';
+        protected $signature = 'consul:refreshServices';
         /**
          * The console command description.
          * @var string
          */
-        protected $description = 'consul register';
+        protected $description = 'consul refreshServices';
 
         public function __construct()
         {
@@ -27,7 +27,7 @@
 
         public function handle()
         {
-            app(ServiceNode::class)->register();
+            app(ServiceManager::class)->refreshServices();
         }
 
 

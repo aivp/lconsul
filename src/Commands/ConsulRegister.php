@@ -5,8 +5,7 @@
 
 
     use Illuminate\Console\Command;
-    use Illuminate\Container\Container;
-    use Ling5821\Lconsul\ServiceNode;
+    use Ling5821\Lconsul\ServiceManager;
 
     class ConsulRegister extends Command
     {
@@ -28,7 +27,7 @@
 
         public function handle()
         {
-            app(ServiceNode::class)->register();
+            app(ServiceManager::class)->register();
         }
 
 

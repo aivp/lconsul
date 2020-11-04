@@ -12,7 +12,7 @@
     use Ling5821\Lconsul\Common\RedisUtils;
     use Ling5821\Lconsul\Common\Utils;
 
-    class ServiceNode
+    class ServiceManager
     {
         private $consul;
         private $appId;
@@ -30,7 +30,6 @@
             $this->consul = new Consul();
             $this->appId = env('SERVICE_ID', 'my-service-01');
             $this->appName = env("SERVICE_NAME", 'my-service');
-//            $this->serviceHost = $_SERVER['SERVER_ADDR'];
             $this->serviceHost = env("SERVER_ADDR", '127.0.0.1');
             $this->servicePort = (int)env('SERVICE_PORT', 80);
             $this->healthCheckUrl = env('SERVICE_HEALTH_CHECK_URL', '/api/health');
@@ -61,7 +60,7 @@
             }
         }
 
-        public function refreshServiceList()
+        public function refreshServices()
         {
             if (Utils::isNotNullStr(env('CONSUL_SERVICES'))) {
                 $serviceNames = explode(',', env('CONSUL_SERVICES'));

@@ -5,9 +5,10 @@
     use Carbon\Laravel\ServiceProvider;
     use Ling5821\Lconsul\Commands\ConsulCmd;
     use Ling5821\Lconsul\Commands\ConsulDeregister;
+    use Ling5821\Lconsul\Commands\ConsulRefreshServices;
     use Ling5821\Lconsul\Commands\ConsulRegister;
-    use Ling5821\Lconsul\Commands\ConsulServicesRefresh;
-    use Ling5821\Lconsul\ServiceNode;
+    use Ling5821\Lconsul\Common\ConsulRpc;
+    use Ling5821\Lconsul\ServiceManager;
 
     class ConsulServiceProvider extends ServiceProvider
     {
@@ -18,15 +19,18 @@
                                     ConsulCmd::class,
                                     ConsulRegister::class,
                                     ConsulDeregister::class,
-                                    ConsulServicesRefresh::class,
+                                    ConsulRefreshServices::class,
                                 ]);
             }
         }
 
         public function register()
         {
-            $this->app->singleton(ServiceNode::class, function ($app) {
-                return new ServiceNode();
+            $this->app->singleton(ServiceManager::class, function ($app) {
+                return new ServiceManager();
+            });
+            $this->app->singleton(ConsulRpc::class, function ($app) {
+                return new ConsulRpc();
             });
         }
 

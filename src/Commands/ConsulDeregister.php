@@ -5,7 +5,7 @@
 
 
     use Illuminate\Console\Command;
-    use Ling5821\Lconsul\ServiceNode;
+    use Ling5821\Lconsul\ServiceManager;
 
     class ConsulDeregister extends Command
     {
@@ -13,12 +13,12 @@
          * The name and signature of the console command.
          * @var string
          */
-        protected $signature = 'consul:register';
+        protected $signature = 'consul:deregister';
         /**
          * The console command description.
          * @var string
          */
-        protected $description = 'consul register';
+        protected $description = 'consul deregister';
 
         public function __construct()
         {
@@ -27,7 +27,7 @@
 
         public function handle()
         {
-            app(ServiceNode::class)->register();
+            app(ServiceManager::class)->deregister();
         }
 
 
