@@ -1,31 +1,19 @@
 <?php
 
 
-    namespace Ling5821\Lconsul\Commands;
+    namespace Ling5821\Lconsul;
 
 
     use DCarbone\PHPConsulAPI\Agent\AgentServiceCheck;
     use DCarbone\PHPConsulAPI\Agent\AgentServiceRegistration;
     use DCarbone\PHPConsulAPI\Consul;
     use DCarbone\PHPConsulAPI\QueryOptions;
-    use Illuminate\Console\Command;
     use Illuminate\Support\Facades\Log;
     use Ling5821\Lconsul\Common\RedisUtils;
     use Ling5821\Lconsul\Common\Utils;
 
-    class ConsulCmd extends Command
+    class ServiceNode
     {
-        /**
-         * The name and signature of the console command.
-         * @var string
-         */
-        protected $signature = 'consul:do {argument}';
-        /**
-         * The console command description.
-         * @var string
-         */
-        protected $description = 'consul';
-
         private $consul;
         private $appId;
         private $appName;
@@ -34,10 +22,11 @@
         private $healthCheckUrl;
         private $healthCheckInterval;
 
-
+        /**
+         * ServiceNode constructor.
+         */
         public function __construct()
         {
-            parent::__construct();
             $this->consul = new Consul();
             $this->appId = env('SERVICE_ID', 'my-service-01');
             $this->appName = env("SERVICE_NAME", 'my-service');
@@ -46,23 +35,6 @@
             $this->servicePort = (int)env('SERVICE_PORT', 80);
             $this->healthCheckUrl = env('SERVICE_HEALTH_CHECK_URL', '/api/health');
             $this->healthCheckInterval = env('SERVICE_HEALTH_CHECK_INTERVAL', 30);
-
-        }
-
-        public function handle()
-        {
-            $argument = $this->argument('argument');
-            switch ($argument) {
-                case 'register':
-                    $this->register();
-                    break;
-                case 'deregister':
-                    $this->deregister();
-                    break;
-                case 'refreshServices':
-                    $this->refreshServiceList();
-                    break;
-            }
         }
 
         public function register()
@@ -126,5 +98,4 @@
 
 
         }
-
     }

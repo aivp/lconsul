@@ -3,7 +3,11 @@
     namespace Ling5821\Lconsul\Providers;
 
     use Carbon\Laravel\ServiceProvider;
-    use Illuminate\Console\Command;
+    use Ling5821\Lconsul\Commands\ConsulCmd;
+    use Ling5821\Lconsul\Commands\ConsulDeregister;
+    use Ling5821\Lconsul\Commands\ConsulRegister;
+    use Ling5821\Lconsul\Commands\ConsulServicesRefresh;
+    use Ling5821\Lconsul\ServiceNode;
 
     class ConsulServiceProvider extends ServiceProvider
     {
@@ -11,14 +15,19 @@
         {
             if ($this->app->runningInConsole()) {
                 $this->commands([
-                                    Command::class,
+                                    ConsulCmd::class,
+                                    ConsulRegister::class,
+                                    ConsulDeregister::class,
+                                    ConsulServicesRefresh::class,
                                 ]);
             }
         }
 
         public function register()
         {
-            parent::register();
+            $this->app->singleton(ServiceNode::class, function ($app) {
+                return new ServiceNode();
+            });
         }
 
 

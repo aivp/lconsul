@@ -12,7 +12,8 @@
         "php": ">=7.1.0",
         "illuminate/console": "5.8.*",
         "dcarbone/php-consul-api": "@stable",
-        "illuminate/support": "5.8.*"
+        "illuminate/support": "5.8.*",
+        "illuminate/container": "5.8.*"
     },
     "autoload": {
         "psr-4": {
