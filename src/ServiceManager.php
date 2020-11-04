@@ -27,13 +27,13 @@
          */
         public function __construct()
         {
-            $this->consul = new Consul();
-            $this->appId = env('SERVICE_ID', 'my-service-01');
-            $this->appName = env("SERVICE_NAME", 'my-service');
-            $this->serviceHost = env("SERVER_ADDR", '127.0.0.1');
-            $this->servicePort = (int)env('SERVICE_PORT', 80);
-            $this->healthCheckUrl = env('SERVICE_HEALTH_CHECK_URL', "http://$this->serviceHost:$this->servicePort/api/health");
-            $this->healthCheckInterval = env('SERVICE_HEALTH_CHECK_INTERVAL', 30);
+            $this->consul              = new Consul();
+            $this->appId               = env('SERVICE_ID', 'my-service-01');
+            $this->appName             = env("SERVICE_NAME", 'my-service');
+            $this->serviceHost         = env("SERVER_ADDR", '127.0.0.1');
+            $this->servicePort         = (int)env('SERVICE_PORT', 80);
+            $this->healthCheckUrl      = env('SERVICE_HEALTH_CHECK_URL', "http://$this->serviceHost:$this->servicePort/api/health");
+            $this->healthCheckInterval = (int)env('SERVICE_HEALTH_CHECK_INTERVAL', 30);
         }
 
         public function register()
@@ -43,9 +43,9 @@
             $registration->setName($this->appName);
             $registration->setAddress($this->serviceHost);
             $registration->setPort($this->servicePort);
-            $check           = new AgentServiceCheck();
-            $check->HTTP     = $this->healthCheckUrl;
-            $check->Interval = $this->healthCheckInterval;
+            $check = new AgentServiceCheck();
+            $check->setHTTP($this->healthCheckUrl);
+            $check->setInterval($this->healthCheckInterval);
             $registration->setCheck($check);
             $err = $this->consul->Agent->serviceRegister($registration);
             if (NULL !== $err) {
@@ -53,7 +53,8 @@
             }
         }
 
-        public function deregister() {
+        public function deregister()
+        {
             $err = $this->consul->Agent->serviceDeregister($this->appId);
             if (NULL !== $err) {
                 throw new \RuntimeException($err);
