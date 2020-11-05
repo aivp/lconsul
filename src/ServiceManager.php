@@ -67,7 +67,7 @@
                 $serviceNames = explode(',', env('CONSUL_SERVICES'));
                 foreach ($serviceNames as $serviceName) {
                     $servicesKey     = Utils::getServiceKey($serviceName);
-                    $serviceInfosStr = RedisUtils::get(Utils::getServiceKey($servicesKey));
+                    $serviceInfosStr = RedisUtils::get($servicesKey);
                     $waitIndex       = 0;
                     if (Utils::isNotNullStr($serviceInfosStr)) {
                         $serviceInfos = json_decode($serviceInfosStr);
