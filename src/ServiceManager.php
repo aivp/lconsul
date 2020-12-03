@@ -28,12 +28,12 @@
         public function __construct()
         {
             $this->consul              = new Consul();
-            $this->appId               = env('SERVICE_ID', 'my-service-01');
-            $this->appName             = env("SERVICE_NAME", 'my-service');
-            $this->serviceHost         = env("SERVER_ADDR", '127.0.0.1');
-            $this->servicePort         = (int)env('SERVICE_PORT', 80);
-            $this->healthCheckUrl      = env('SERVICE_HEALTH_CHECK_URL', "http://$this->serviceHost:$this->servicePort/api/health");
-            $this->healthCheckInterval = (int)env('SERVICE_HEALTH_CHECK_INTERVAL', 30);
+            $this->appId               = config('consul.service.id');
+            $this->appName             = config('consul.service.name');
+            $this->serviceHost         = config('consul.service.addr');
+            $this->servicePort         = (int)config('consul.service.port');
+            $this->healthCheckUrl      = config('consul.service.health_check_url');
+            $this->healthCheckInterval = (int)config('consul.service.health_check_interval');
         }
 
         public function register()
@@ -63,8 +63,8 @@
 
         public function refreshServices()
         {
-            if (Utils::isNotNullStr(env('CONSUL_SERVICES'))) {
-                $serviceNames = explode(',', env('CONSUL_SERVICES'));
+            $serviceNames = config('consul.consul_services');
+            if (sizeof($serviceNames)) {
                 foreach ($serviceNames as $serviceName) {
                     $servicesKey     = Utils::getServiceKey($serviceName);
                     $serviceInfosStr = RedisUtils::get($servicesKey);

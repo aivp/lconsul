@@ -14,6 +14,9 @@
     {
         public function boot()
         {
+            $this->publishes([
+                                 __DIR__.'/../../config/consul.php' => config_path('consul.php'),
+                             ], 'config');
             if ($this->app->runningInConsole()) {
                 $this->commands([
                                     ConsulCmd::class,

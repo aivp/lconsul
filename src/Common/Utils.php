@@ -32,6 +32,6 @@
         }
 
         public static function getServiceKey($serviceName) {
-            return env('SERVICE_LIST_CACHE_PREFIX', 'service_list') . ':' . $serviceName;
+            return config('consul.service_list_cache_prefix') . ':' . $serviceName;
         }
     }
