@@ -1,6 +1,7 @@
 <?php
 
     return [
+        'addr' => '127.0.0.1:8500',
         'service' => [
             'id' => 'my-service-01',
             'name' => 'my-service',

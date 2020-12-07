@@ -6,6 +6,7 @@
 
     use DCarbone\PHPConsulAPI\Agent\AgentServiceCheck;
     use DCarbone\PHPConsulAPI\Agent\AgentServiceRegistration;
+    use DCarbone\PHPConsulAPI\Config;
     use DCarbone\PHPConsulAPI\Consul;
     use DCarbone\PHPConsulAPI\QueryOptions;
     use Illuminate\Support\Facades\Log;
@@ -27,7 +28,7 @@
          */
         public function __construct()
         {
-            $this->consul              = new Consul();
+            $this->consul              = new Consul(new Config(['Address' => config('consul.addr')]));
             $this->appId               = config('consul.service.id');
             $this->appName             = config('consul.service.name');
             $this->serviceHost         = config('consul.service.addr');
